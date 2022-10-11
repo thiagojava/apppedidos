@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.orderRouter = void 0;
+const express_1 = require("express");
+const OrderBusiness_1 = __importDefault(require("../business/OrderBusiness"));
+const OrderController_1 = require("../controller/OrderController");
+const OrderDatabase_1 = __importDefault(require("../database/OrderDatabase"));
+const PriceDatabase_1 = __importDefault(require("../database/PriceDatabase"));
+const UserDatabase_1 = __importDefault(require("../database/UserDatabase"));
+const authenticator_1 = __importDefault(require("../services/authenticator"));
+const hashManager_1 = __importDefault(require("../services/hashManager"));
+const idGenerator_1 = require("../services/idGenerator");
+exports.orderRouter = (0, express_1.Router)();
+const orderController = new OrderController_1.OrderController(new OrderBusiness_1.default(new OrderDatabase_1.default(), new UserDatabase_1.default(), new PriceDatabase_1.default(), new authenticator_1.default(), new idGenerator_1.IdGenerator(), new hashManager_1.default()));
+exports.orderRouter.post("/orderPizza", orderController.newOrder);
+exports.orderRouter.get("/order/:id", orderController.getOrderById);
+exports.orderRouter.get("/orders/", orderController.getOrders);
