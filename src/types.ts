@@ -35,3 +35,6 @@ export enum OrderStatus {
   DELIVERY = "delivery",
   FINALIZADO = "finalizado",
 }
+export interface MessageWhatsapp {
+  message: string;
+}

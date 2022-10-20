@@ -5,7 +5,7 @@ import Order, { GetOrderSearch } from "../model/Order";
 import Authenticator from "../services/authenticator";
 import HashManager from "../services/hashManager";
 import { IdGenerator } from "../services/idGenerator";
-import { OrderStatus, UserRole } from "../types";
+import { MessageWhatsapp, OrderStatus, UserRole } from "../types";
 
 export default class OrderBusiness {
   constructor(
@@ -74,13 +74,13 @@ export default class OrderBusiness {
 
     const orderDatabase = new OrderDatabase();
     await orderDatabase.setOrder(newOrder);
-
     const response = {
       newOrder,
     };
 
     return response;
   };
+
   public getOrderById = async (input: any) => {
     const { token, id } = input;
 
